@@ -1,10 +1,12 @@
 package com.favoratti.harmonicashortcut.composable.section
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.favoratti.harmonicashortcut.composable.harmonica.HarmonicaKeySelectorForImage
+import androidx.compose.ui.unit.dp
+import com.favoratti.harmonicashortcut.composable.harmonica.HarmonicaKeySelectorForLayout
 import com.favoratti.harmonicashortcut.composable.harmonica.HarmonicaLayout
 import com.favoratti.harmonicashortcut.composable.util.HarmonicaCardTitle
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
@@ -16,13 +18,14 @@ fun HarmonicaLayoutSection(harmonicaLayoutViewModel: HarmonicaLayoutViewModel) {
         title = "Harmonica Layout",
         containerColor = MaterialTheme.colorScheme.secondaryContainer
     ) {
-        HarmonicaKeySelectorForImage(
+        HarmonicaKeySelectorForLayout(
             keys = harmonicaLayoutViewModel.getKeys(),
             selectedKey = harmonicaLayoutViewModel.keyState,
             onKeyClick = harmonicaLayoutViewModel::onKeyClick
         )
 
         HarmonicaLayout(
+            paddingValues = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
             keyState = harmonicaLayoutViewModel.keyState,
             onKeyLayoutSelection = harmonicaLayoutViewModel::onKeyLayoutSelection
         )

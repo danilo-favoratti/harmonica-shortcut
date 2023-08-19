@@ -26,7 +26,7 @@ fun CycleOfFifths() {
                 contentDescription = "Image",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp, top = 8.dp),
+                    .padding(16.dp),
                 contentScale = ContentScale.FillWidth
             )
         }

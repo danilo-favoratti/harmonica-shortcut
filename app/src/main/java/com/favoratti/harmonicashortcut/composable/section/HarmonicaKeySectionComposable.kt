@@ -1,8 +1,10 @@
 package com.favoratti.harmonicashortcut.composable.section
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.favoratti.harmonicashortcut.composable.harmonica.HarmonicaKeySelector
 import com.favoratti.harmonicashortcut.composable.harmonica.HarmonicaLayout
 import com.favoratti.harmonicashortcut.composable.harmonica.HarmonicaPositionDisplay
@@ -39,6 +41,7 @@ fun HarmonicaKeySection(
         HarmonicaLayout(
             keyState = harmonicaKeyViewModel.selectedKeyState,
             positionMapState = harmonicaKeyViewModel.positionMapState,
+            paddingValues = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
             onKeyLayoutSelection = harmonicaLayoutViewModel::onKeyLayoutSelection,
             onKeyLayoutHighlight = harmonicaLayoutViewModel::onKeyLayoutHighlight
         )

@@ -91,7 +91,7 @@ fun KeysHarmonicaPosition(
         Column(
             modifier = Modifier
                 .weight(1f)
-                .padding(bottom = 8.dp),
+                .padding(bottom = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             KeyPosition(

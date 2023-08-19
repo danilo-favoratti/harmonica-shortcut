@@ -3,6 +3,7 @@ package com.favoratti.harmonicashortcut.composable.util
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -31,9 +32,9 @@ fun HarmonicaCardTitle(
         )
     }
 
-    Row {
+    Row(modifier = Modifier.padding(bottom = paddingBottom)) {
         HarmonicaCard(
-            containerColor, paddingBottom, content
+            containerColor, content = content
         )
     }
 }
@@ -41,11 +42,13 @@ fun HarmonicaCardTitle(
 @Composable
 fun HarmonicaCard(
     containerColor: Color = MaterialTheme.colorScheme.tertiaryContainer,
-    paddingBottom: Dp = 0.dp,
+    paddingValues: PaddingValues = PaddingValues(horizontal = 16.dp),
     content: @Composable ColumnScope.() -> Unit
 ) {
     Card(
-        modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = paddingBottom),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(paddingValues),
         colors = CardDefaults.cardColors(
             containerColor = containerColor
         ),

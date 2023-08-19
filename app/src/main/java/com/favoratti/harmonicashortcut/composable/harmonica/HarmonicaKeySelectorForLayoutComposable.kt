@@ -18,7 +18,7 @@ import com.favoratti.harmonicashortcut.composable.KeySelection
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 
 @Composable
-fun HarmonicaKeySelectorForImage(
+fun HarmonicaKeySelectorForLayout(
     keys: List<String>,
     selectedKey: State<String>,
     onKeyClick: (String) -> Unit
