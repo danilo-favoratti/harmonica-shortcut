@@ -1,13 +1,19 @@
 package com.favoratti.harmonicashortcut.composable.harmonica
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.favoratti.harmonicashortcut.composable.Key
+import com.favoratti.harmonicashortcut.data.Data
+import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 import com.favoratti.harmonicashortcut.ui.theme.bend_color
 import com.favoratti.harmonicashortcut.ui.theme.key_color
 import com.favoratti.harmonicashortcut.ui.theme.key_font_color
@@ -54,5 +60,29 @@ fun HarmonicaLayout(
                 }
             }
         }
+    }
+}
+
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    name = "DefaultPreviewDark",
+    showBackground = true
+)
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    name = "DefaultPreviewLight",
+    showBackground = true
+)
+@Composable
+fun HarmonicaLayoutPreview() {
+    HarmonicaShortcutTheme {
+        val keyState = remember { mutableStateOf("C") }
+        val positionMapState =
+            remember { mutableStateOf(Data.arrayPositionMap[1]) }
+        HarmonicaLayout(
+            keyState = keyState,
+            positionMapState = positionMapState,
+            onKeyLayoutSelection = { _, _, _ -> "C" }
+        )
     }
 }

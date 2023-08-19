@@ -1,10 +1,8 @@
 package com.favoratti.harmonicashortcut.viewmodel
 
-import androidx.annotation.DrawableRes
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.favoratti.harmonicashortcut.R
 import com.favoratti.harmonicashortcut.data.Data
 import com.favoratti.harmonicashortcut.extension.toFlat
 import com.favoratti.harmonicashortcut.extension.toSharp
