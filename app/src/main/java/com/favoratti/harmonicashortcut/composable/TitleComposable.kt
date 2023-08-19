@@ -16,22 +16,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 
-object TitleComposable {
-
-    @Composable
-    fun Title(
-        text: String,
-        color: Color = MaterialTheme.colorScheme.onBackground
-    ) {
-        Row {
-            Text(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth(),
-                style = MaterialTheme.typography.labelLarge.copy(fontSize = 28.sp, color = color),
-                text = text
-            )
-        }
+@Composable
+fun Title(
+    text: String,
+    color: Color = MaterialTheme.colorScheme.onBackground
+) {
+    Row {
+        Text(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            style = MaterialTheme.typography.labelLarge.copy(fontSize = 28.sp, color = color),
+            text = text
+        )
     }
 }
 
@@ -49,7 +46,7 @@ object TitleComposable {
 fun TitleComposablePreview() {
     HarmonicaShortcutTheme {
         val key = remember { mutableStateOf("C") }
-        TitleComposable.Title(
+        Title(
             text = "Harmonica Key:"
         )
     }

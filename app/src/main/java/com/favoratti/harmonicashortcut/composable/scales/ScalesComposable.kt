@@ -21,84 +21,81 @@ import androidx.compose.ui.unit.dp
 import com.favoratti.harmonicashortcut.data.Data
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 
-object ScalesComposable {
-
+@Composable
+fun Scales() {
     @Composable
-    fun Scales() {
-        @Composable
-        fun String.getAnnotatedPrimary() = buildAnnotatedString {
-            withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
-                append(this@getAnnotatedPrimary)
-            }
-        }
-
-        @Composable
-        fun String.getAnnotatedSecondary() = buildAnnotatedString {
-            withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.secondary)) {
-                append(this@getAnnotatedSecondary)
-            }
-        }
-
-        Column(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            RowScaleTitle(text = "1st position - Major Pentatonic")
-            RowScaleNotAnnotated(text = Data.firstPositionScale)
-            RowScaleTitle(text = "2nd position - Major Pentatonic")
-            RowScaleNotAnnotated(text = Data.secondPositionScale)
-            RowScaleTitle(text = "2nd position - Major Pentatonic - extra bends")
-            RowScaleNotAnnotated(text = Data.secondPositionScaleExtraBends)
-            /*RowScale(annotatedText = buildAnnotatedString {
-                append("-1 2 -2 -3’’ -3’ -3 ".getAnnotatedPrimary())
-                append("-4’ ".getAnnotatedSecondary())
-                append("-4 5 6 ".getAnnotatedPrimary())
-                append("-6’ ".getAnnotatedSecondary())
-                append("-6 -7 -8 ".getAnnotatedPrimary())
-                append("8’ ".getAnnotatedSecondary())
-                append("8 9 -10".getAnnotatedPrimary())
-            })*/
-            RowScaleTitle(text = "3rd position")
-            RowScaleNotAnnotated(text = Data.thirdPositionScale)
+    fun String.getAnnotatedPrimary() = buildAnnotatedString {
+        withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
+            append(this@getAnnotatedPrimary)
         }
     }
 
     @Composable
-    fun RowScaleTitle(
-        text: String
+    fun String.getAnnotatedSecondary() = buildAnnotatedString {
+        withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.secondary)) {
+            append(this@getAnnotatedSecondary)
+        }
+    }
+
+    Column(
+        modifier = Modifier.fillMaxWidth()
     ) {
-        RowScale(
-            textStyle = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Normal),
-            annotatedText = buildAnnotatedString {
-                withStyle(style = SpanStyle(fontWeight = FontWeight.Normal)) {
-                    append(text)
-                }
+        RowScaleTitle(text = "1st position - Major Pentatonic")
+        RowScaleNotAnnotated(text = Data.firstPositionScale)
+        RowScaleTitle(text = "2nd position - Major Pentatonic")
+        RowScaleNotAnnotated(text = Data.secondPositionScale)
+        RowScaleTitle(text = "2nd position - Major Pentatonic - extra bends")
+        RowScaleNotAnnotated(text = Data.secondPositionScaleExtraBends)
+        /*RowScale(annotatedText = buildAnnotatedString {
+            append("-1 2 -2 -3’’ -3’ -3 ".getAnnotatedPrimary())
+            append("-4’ ".getAnnotatedSecondary())
+            append("-4 5 6 ".getAnnotatedPrimary())
+            append("-6’ ".getAnnotatedSecondary())
+            append("-6 -7 -8 ".getAnnotatedPrimary())
+            append("8’ ".getAnnotatedSecondary())
+            append("8 9 -10".getAnnotatedPrimary())
+        })*/
+        RowScaleTitle(text = "3rd position")
+        RowScaleNotAnnotated(text = Data.thirdPositionScale)
+    }
+}
+
+@Composable
+fun RowScaleTitle(
+    text: String
+) {
+    RowScale(
+        textStyle = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Normal),
+        annotatedText = buildAnnotatedString {
+            withStyle(style = SpanStyle(fontWeight = FontWeight.Normal)) {
+                append(text)
             }
+        }
+    )
+}
+
+@Composable
+fun RowScaleNotAnnotated(
+    text: String
+) {
+    Scale(scale = text)
+}
+
+@Composable
+fun RowScale(
+    textStyle: TextStyle = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+    annotatedText: AnnotatedString
+) {
+    Row(
+        modifier = Modifier
+            .padding(8.dp)
+            .height(20.dp)
+            .fillMaxWidth()
+    ) {
+        Text(
+            style = textStyle,
+            text = annotatedText
         )
-    }
-
-    @Composable
-    fun RowScaleNotAnnotated(
-        text: String
-    ) {
-        ScaleComposable.Scale(scale = text)
-    }
-
-    @Composable
-    fun RowScale(
-        textStyle: TextStyle = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-        annotatedText: AnnotatedString
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(8.dp)
-                .height(20.dp)
-                .fillMaxWidth()
-        ) {
-            Text(
-                style = textStyle,
-                text = annotatedText
-            )
-        }
     }
 }
 
@@ -115,6 +112,6 @@ object ScalesComposable {
 @Composable
 fun ScalesComposablePreview() {
     HarmonicaShortcutTheme {
-        ScalesComposable.Scales()
+        Scales()
     }
 }

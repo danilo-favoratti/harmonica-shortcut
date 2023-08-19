@@ -15,26 +15,22 @@ import androidx.compose.ui.unit.dp
 import com.favoratti.harmonicashortcut.R
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 
-object CycleOfFifthsComposable {
-
-    @Composable
-    fun CycleOfFifths() {
-        Column(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Row {
-                Image(
-                    painter = painterResource(id = R.drawable.cycle_of_fifths), // Replace with the actual image resource
-                    contentDescription = "Image",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 16.dp, end = 16.dp, bottom = 16.dp, top = 8.dp),
-                    contentScale = ContentScale.FillWidth
-                )
-            }
+@Composable
+fun CycleOfFifths() {
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row {
+            Image(
+                painter = painterResource(id = R.drawable.cycle_of_fifths), // Replace with the actual image resource
+                contentDescription = "Image",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp, top = 8.dp),
+                contentScale = ContentScale.FillWidth
+            )
         }
     }
-
 }
 
 @Preview(
@@ -50,6 +46,6 @@ object CycleOfFifthsComposable {
 @Composable
 fun CycleOfFifthsPreview() {
     HarmonicaShortcutTheme {
-        CycleOfFifthsComposable.CycleOfFifths()
+        CycleOfFifths()
     }
 }

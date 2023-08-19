@@ -14,32 +14,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.favoratti.harmonicashortcut.composable.KeyComposable
+import com.favoratti.harmonicashortcut.composable.KeySelection
 import com.favoratti.harmonicashortcut.data.Data
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 
-object HarmonicaKeySelectorComposable {
-
-    @Composable
-    fun HarmonicaKeySelector(
-        harmonicaKey: State<String>,
-        onKeySelectionClick: (String) -> Unit
-    ) {
-        Column {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(36.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Data.keys.forEach { key ->
-                    KeyComposable.KeySelection(
-                        selectedKey = harmonicaKey,
-                        key = key,
-                        onKeyClick = onKeySelectionClick
-                    )
-                }
+@Composable
+fun HarmonicaKeySelector(
+    harmonicaKey: State<String>,
+    onKeySelectionClick: (String) -> Unit
+) {
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(36.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Data.keys.forEach { key ->
+                KeySelection(
+                    selectedKey = harmonicaKey,
+                    key = key,
+                    onKeyClick = onKeySelectionClick
+                )
             }
         }
     }
@@ -59,7 +56,7 @@ object HarmonicaKeySelectorComposable {
 fun HarmonicaKeySelectorPreview() {
     HarmonicaShortcutTheme {
         val selectedKey = remember { mutableStateOf("C") }
-        HarmonicaKeySelectorComposable.HarmonicaKeySelector(harmonicaKey = selectedKey) {
+        HarmonicaKeySelector(harmonicaKey = selectedKey) {
             // do nothing
         }
     }

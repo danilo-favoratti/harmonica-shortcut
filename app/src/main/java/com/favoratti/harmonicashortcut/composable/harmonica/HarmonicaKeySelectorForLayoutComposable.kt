@@ -14,32 +14,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.favoratti.harmonicashortcut.composable.KeyComposable
+import com.favoratti.harmonicashortcut.composable.KeySelection
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 
-object HarmonicaKeySelectorForImageComposable {
-
-    @Composable
-    fun HarmonicaKeySelectorForImage(
-        keys: List<String>,
-        selectedKey: State<String>,
-        onKeyClick: (String) -> Unit
-    ) {
-        Column {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(36.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                keys.forEach { key ->
-                    KeyComposable.KeySelection(
-                        selectedKey = selectedKey,
-                        key = key,
-                        onKeyClick = onKeyClick
-                    )
-                }
+@Composable
+fun HarmonicaKeySelectorForImage(
+    keys: List<String>,
+    selectedKey: State<String>,
+    onKeyClick: (String) -> Unit
+) {
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(36.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            keys.forEach { key ->
+                KeySelection(
+                    selectedKey = selectedKey,
+                    key = key,
+                    onKeyClick = onKeyClick
+                )
             }
         }
     }
@@ -59,7 +56,7 @@ object HarmonicaKeySelectorForImageComposable {
 fun HarmonicaKeySelectorForImageComposable() {
     HarmonicaShortcutTheme {
         val selectedKey = remember { mutableStateOf("C") }
-        HarmonicaKeySelectorComposable.HarmonicaKeySelector(harmonicaKey = selectedKey) {
+        HarmonicaKeySelector(harmonicaKey = selectedKey) {
             // do nothing
         }
     }

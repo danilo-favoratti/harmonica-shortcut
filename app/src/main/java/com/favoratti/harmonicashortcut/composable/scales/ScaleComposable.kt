@@ -17,34 +17,31 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 
-object ScaleComposable {
-
-    @Composable
-    fun Scale(
-        scale: String
+@Composable
+fun Scale(
+    scale: String
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
         ) {
-            Box(
+            Text(
                 modifier = Modifier
                     .fillMaxWidth()
-            ) {
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.tertiary)
-                        .padding(8.dp)
-                        .align(Alignment.Center),
-                    style = MaterialTheme.typography.labelLarge.copy(
-                        color = MaterialTheme.colorScheme.onTertiary,
-                        fontSize = 16.sp
-                    ),
-                    text = scale
-                )
-            }
+                    .background(MaterialTheme.colorScheme.tertiary)
+                    .padding(8.dp)
+                    .align(Alignment.Center),
+                style = MaterialTheme.typography.labelLarge.copy(
+                    color = MaterialTheme.colorScheme.onTertiary,
+                    fontSize = 16.sp
+                ),
+                text = scale
+            )
         }
     }
 }
@@ -63,7 +60,7 @@ object ScaleComposable {
 fun ScaleComposablePreview() {
     HarmonicaShortcutTheme {
         val key = remember { mutableStateOf("C") }
-        ScaleComposable.Scale(
+        Scale(
             scale = "-1, -2, -3, -4, -5, -6"
         )
     }

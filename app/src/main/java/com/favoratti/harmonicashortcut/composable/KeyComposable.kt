@@ -20,82 +20,79 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 
-object KeyComposable {
+@Composable
+fun KeySelection(
+    selectedKey: State<String>,
+    key: String,
+    onKeyClick: (String) -> Unit
+) {
+    KeyLayout(selectedKey = selectedKey, key = key) {
+        onKeyClick.invoke(key)
+    }
+}
 
-    @Composable
-    fun KeySelection(
-        selectedKey: State<String>,
-        key: String,
-        onKeyClick: (String) -> Unit
-    ) {
-        KeyLayout(selectedKey = selectedKey, key = key) {
-            onKeyClick.invoke(key)
-        }
+@Composable
+fun KeyPosition(
+    selectedKey: State<String>,
+    key: String,
+    position: Int,
+    onKeyScaleSelectionClick: (String, Int) -> Unit
+) {
+    KeyLayout(selectedKey = selectedKey, key = key) {
+        onKeyScaleSelectionClick.invoke(key, position)
+    }
+}
+
+@Composable
+fun KeyLayout(
+    selectedKey: State<String>,
+    key: String,
+    onClick: () -> Unit
+) {
+    val backgroundColor = if (selectedKey.value == key) {
+        MaterialTheme.colorScheme.primary
+    } else {
+        MaterialTheme.colorScheme.secondary
     }
 
-    @Composable
-    fun KeyPosition(
-        selectedKey: State<String>,
-        key: String,
-        position: Int,
-        onKeyScaleSelectionClick: (String, Int) -> Unit
-    ) {
-        KeyLayout(selectedKey = selectedKey, key = key) {
-            onKeyScaleSelectionClick.invoke(key, position)
-        }
+    val fontColor = if (selectedKey.value == key) {
+        MaterialTheme.colorScheme.onPrimary
+    } else {
+        MaterialTheme.colorScheme.onSecondary
     }
 
-    @Composable
-    fun KeyLayout(
-        selectedKey: State<String>,
-        key: String,
-        onClick: () -> Unit
-    ) {
-        val backgroundColor = if (selectedKey.value == key) {
-            MaterialTheme.colorScheme.primary
-        } else {
-            MaterialTheme.colorScheme.secondary
-        }
+    Key(key, backgroundColor, fontColor, onClick)
+}
 
-        val fontColor = if (selectedKey.value == key) {
-            MaterialTheme.colorScheme.onPrimary
-        } else {
-            MaterialTheme.colorScheme.onSecondary
-        }
-
-        Key(key, backgroundColor, fontColor, onClick)
-    }
-
-    @Composable
-    fun Key(
-        key: String,
-        backgroundColor: Color = MaterialTheme.colorScheme.primary,
-        fontColor: Color = MaterialTheme.colorScheme.onPrimary,
-        onClick: () -> Unit = { }
-    ) {
-        if (key.isEmpty()) {
-            Box(
-                modifier = Modifier
-                    .background(Color.Transparent)
-                    .width(28.dp)
-                    .height(28.dp)
+@Composable
+fun Key(
+    key: String,
+    backgroundColor: Color = MaterialTheme.colorScheme.primary,
+    fontColor: Color = MaterialTheme.colorScheme.onPrimary,
+    onClick: () -> Unit = { }
+) {
+    if (key.isEmpty()) {
+        Box(
+            modifier = Modifier
+                .background(Color.Transparent)
+                .width(28.dp)
+                .height(28.dp)
+        )
+    } else {
+        Box(
+            modifier = Modifier
+                .background(backgroundColor)
+                .width(28.dp)
+                .height(28.dp)
+                .border(1.dp, MaterialTheme.colorScheme.outlineVariant)
+                .clickable(onClick = onClick),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                modifier = Modifier.align(Alignment.Center),
+                style = MaterialTheme.typography.labelMedium.copy(color = fontColor),
+                text = key
             )
-        } else {
-            Box(
-                modifier = Modifier
-                    .background(backgroundColor)
-                    .width(28.dp)
-                    .height(28.dp)
-                    .border(1.dp, MaterialTheme.colorScheme.outlineVariant)
-                    .clickable(onClick = onClick),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    modifier = Modifier.align(Alignment.Center),
-                    style = MaterialTheme.typography.labelMedium.copy(color = fontColor),
-                    text = key
-                )
-            }
         }
     }
 }
@@ -114,7 +111,7 @@ object KeyComposable {
 fun KeyComposablePreview() {
     HarmonicaShortcutTheme {
         val key = remember { mutableStateOf("C") }
-        KeyComposable.KeySelection(
+        KeySelection(
             selectedKey = key,
             key = "C"
         ) {
@@ -139,7 +136,7 @@ fun KeyComposableNotSelectedPreview() {
         val key = remember {
             mutableStateOf("C")
         }
-        KeyComposable.KeySelection(
+        KeySelection(
             selectedKey = key,
             key = "D"
         ) {
