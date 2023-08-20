@@ -96,7 +96,7 @@ fun Key(
         ) {
             val text = number?.let {
                 "$number:$text"
-            }?: text
+            } ?: text
             Text(
                 modifier = Modifier.align(Alignment.Center),
                 style = MaterialTheme.typography.labelMedium.copy(color = fontColor),

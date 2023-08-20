@@ -2,10 +2,10 @@ package com.favoratti.harmonicashortcut.composable.util
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -42,6 +42,12 @@ fun UsefulLinks(
         RowTitle(text = "Soulful Mellow Groove Track Jam in B Minor")
         RowLink(text = "https://www.youtube.com/watch?v=QLiLE_u_7QY", openLink = openLink)
 
+        RowTitle(text = "A Major backing track")
+        RowLink(text = "https://www.youtube.com/watch?v=IYmy2q1ojug", openLink = openLink)
+
+        RowTitle(text = "F#m reggae backing track:")
+        RowLink(text = "https://www.youtube.com/watch?v=95eJeHCYYF4", openLink = openLink)
+
         RowTitle(text = "Notions Music")
         RowLink(
             text = "https://www.notion.so/Gaita-M-sicas-Estudar-b6f770d0f13a46499b6646bdb4b32e7b",
@@ -67,25 +73,26 @@ fun RowTitle(text: String) {
 @Composable
 fun RowLink(
     textStyle: TextStyle = MaterialTheme.typography.bodyLarge.copy(
-        color = MaterialTheme.colorScheme.secondary,
+        color = MaterialTheme.colorScheme.onSecondaryContainer,
         textDecoration = TextDecoration.Underline,
         fontSize = 12.sp
     ),
     text: String,
     openLink: (String) -> Unit
 ) {
-    Row(
+    Column(
         modifier = Modifier
             .padding(8.dp)
             .height(20.dp)
             .fillMaxWidth()
     ) {
         ClickableText(
+            modifier = Modifier.selectableGroup(),
             style = textStyle,
             text = buildAnnotatedString {
                 append(text)
             },
-            onClick = {
+            onClick = { _ ->
                 openLink.invoke(text)
             }
         )

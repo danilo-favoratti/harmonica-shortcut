@@ -5,8 +5,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.favoratti.harmonicashortcut.composable.harmonica.HarmonicaKeySelectorForLayout
 import com.favoratti.harmonicashortcut.composable.HarmonicaLayout
+import com.favoratti.harmonicashortcut.composable.harmonica.HarmonicaKeySelectorForLayout
 import com.favoratti.harmonicashortcut.composable.util.HarmonicaCardTitle
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 import com.favoratti.harmonicashortcut.viewmodel.HarmonicaLayoutViewModel

@@ -132,7 +132,10 @@ fun TextHarmonicaPosition(
     Box(modifier = Modifier.padding(8.dp)) {
         Text(
             modifier = Modifier.fillMaxWidth(),
-            style = textStyle.copy(textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.secondaryContainer),
+            style = textStyle.copy(
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.secondaryContainer
+            ),
             text = text
         )
     }
