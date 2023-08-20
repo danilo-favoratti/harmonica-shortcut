@@ -20,12 +20,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.favoratti.harmonicashortcut.composable.KeyPosition
-import com.favoratti.harmonicashortcut.composable.scales.Scale
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 
 @Composable
 fun SongPositionDisplay(
-    scaleState: State<String>,
     scaleKeyState: State<String>,
     firstPosition: State<String>,
     secondPosition: State<String>,
@@ -61,9 +59,6 @@ fun SongPositionDisplay(
                     onKeyScaleSelectionClick = onKeyScaleSelectionClick
                 )
             }
-        }
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Scale(scale = scaleState.value)
         }
     }
 }
@@ -125,7 +120,6 @@ fun SongPositionDisplayPreview() {
         val thirdPosition = remember { mutableStateOf("Dm") }
 
         SongPositionDisplay(
-            scaleState = scaleState,
             scaleKeyState = scaleKeyState,
             firstPosition = firstPosition,
             secondPosition = secondPosition,

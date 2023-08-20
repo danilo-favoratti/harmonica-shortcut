@@ -33,11 +33,11 @@ fun Scale(
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.tertiary)
+                    .background(MaterialTheme.colorScheme.tertiaryContainer)
                     .padding(8.dp)
                     .align(Alignment.Center),
                 style = MaterialTheme.typography.labelLarge.copy(
-                    color = MaterialTheme.colorScheme.onTertiary,
+                    color = MaterialTheme.colorScheme.onTertiaryContainer,
                     fontSize = 16.sp
                 ),
                 text = scale

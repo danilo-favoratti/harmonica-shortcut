@@ -24,12 +24,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.favoratti.harmonicashortcut.composable.KeyPosition
-import com.favoratti.harmonicashortcut.composable.scales.Scale
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 
 @Composable
 fun HarmonicaPositionDisplay(
-    scaleState: State<String>,
     scaleKeyState: State<String>,
     firstPosition: State<String>,
     secondPosition: State<String>,
@@ -72,10 +70,6 @@ fun HarmonicaPositionDisplay(
                 )
             }
         }
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Scale(scale = scaleState.value)
-        }
-
     }
 }
 
@@ -117,7 +111,7 @@ fun KeysHarmonicaPosition(
 
 @Composable
 fun PositionCard(
-    containerColor: Color = MaterialTheme.colorScheme.primaryContainer,
+    containerColor: Color = MaterialTheme.colorScheme.onSecondaryContainer,
     modifier: Modifier,
     content: @Composable ColumnScope.() -> Unit
 ) {
@@ -138,7 +132,7 @@ fun TextHarmonicaPosition(
     Box(modifier = Modifier.padding(8.dp)) {
         Text(
             modifier = Modifier.fillMaxWidth(),
-            style = textStyle.copy(textAlign = TextAlign.Center),
+            style = textStyle.copy(textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.secondaryContainer),
             text = text
         )
     }
@@ -167,7 +161,6 @@ fun PositionDisplayPreview() {
         val twelfthPosition = remember { mutableStateOf("F") }
 
         HarmonicaPositionDisplay(
-            scaleState = scaleState,
             scaleKeyState = scaleKeyState,
             firstPosition = firstPosition,
             secondPosition = secondPosition,

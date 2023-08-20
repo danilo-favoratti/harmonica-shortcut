@@ -1,4 +1,4 @@
-package com.favoratti.harmonicashortcut.composable.harmonica
+package com.favoratti.harmonicashortcut.composable
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
@@ -15,28 +15,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.favoratti.harmonicashortcut.composable.Key
 import com.favoratti.harmonicashortcut.composable.util.HarmonicaCard
 import com.favoratti.harmonicashortcut.data.Data
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
-import com.favoratti.harmonicashortcut.ui.theme.bend_color
-import com.favoratti.harmonicashortcut.ui.theme.key_color
-import com.favoratti.harmonicashortcut.ui.theme.key_font_color
-import com.favoratti.harmonicashortcut.ui.theme.key_font_color_highlight
-import com.favoratti.harmonicashortcut.ui.theme.over_blow_color
+import com.favoratti.harmonicashortcut.ui.theme.customColorScheme
 
 @Composable
 fun HarmonicaLayout(
     keyState: State<String>,
     paddingValues: PaddingValues = PaddingValues(horizontal = 16.dp),
     positionMapState: State<Map<Int, ArrayList<Boolean>>?>? = null,
+    showNumbers: Boolean = false,
     onKeyLayoutSelection: (String, Int, Int) -> String,
     onKeyLayoutHighlight: ((Int, Int, Map<Int, ArrayList<Boolean>>?) -> Boolean)? = null
 ) {
     if (keyState.value.isNotEmpty()) {
         HarmonicaCard(
-            paddingValues = paddingValues,
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            paddingValues = paddingValues
         ) {
             Column(
                 modifier = Modifier
@@ -44,27 +40,59 @@ fun HarmonicaLayout(
                     .padding(vertical = 8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                for (line in 0..6) {
+                for (row in 0..6) {
                     Row {
-                        for (row in 0..9) {
-                            val backgroundColor =
-                                when (line) {
-                                    in listOf(0, 1) -> over_blow_color
-                                    in listOf(2, 3) -> key_color
-                                    else -> bend_color
+                        for (column in 0..9) {
+                            var backgroundColor =
+                                when (row) {
+                                    in listOf(0, 1), in listOf(4, 5, 6) ->
+                                        MaterialTheme.colorScheme.primary
+
+                                    in listOf(2, 3) ->
+                                        MaterialTheme.colorScheme.onSecondaryContainer
+
+                                    else -> MaterialTheme.colorScheme.primary
                                 }
 
                             val highlightFontColor =
                                 onKeyLayoutHighlight?.let {
-                                    if (onKeyLayoutHighlight(line, row, positionMapState?.value)) {
-                                        key_font_color_highlight
+                                    if (onKeyLayoutHighlight(
+                                            row,
+                                            column,
+                                            positionMapState?.value
+                                        )
+                                    ) {
+                                        backgroundColor = MaterialTheme.customColorScheme.highlight
+                                        MaterialTheme.customColorScheme.onHighlight
                                     } else {
-                                        key_font_color
+                                        MaterialTheme.colorScheme.onPrimary
                                     }
-                                } ?: key_font_color
+                                } ?: MaterialTheme.colorScheme.onPrimary
+
+                            // show numbers with bends or notes
+                            val note = onKeyLayoutSelection(keyState.value, row, column)
+                            val text = if (showNumbers) {
+                                if (note.isEmpty()) {
+                                    ""
+                                } else {
+                                    if (row > 2) {
+                                        "-"
+                                    } else {
+                                        ""
+                                    } + "${column + 1}" +
+                                            when (row) {
+                                                1, 4 -> "'"
+                                                0, 5 -> "''"
+                                                6 -> "'''"
+                                                else -> ""
+                                            }
+                                }
+                            } else {
+                                note
+                            }
 
                             Key(
-                                key = onKeyLayoutSelection(keyState.value, line, row),
+                                text = text,
                                 backgroundColor = backgroundColor,
                                 fontColor = highlightFontColor
                             )

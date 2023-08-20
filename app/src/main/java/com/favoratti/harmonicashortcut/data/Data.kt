@@ -1,11 +1,26 @@
 package com.favoratti.harmonicashortcut.data
 
 object Data {
-    val keys: CircularList<String> =
-        CircularList(listOf("A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"))
+    val keys: CircularList<String>
+        get() = CircularList(
+            listOf(
+                "A",
+                "A#",
+                "B",
+                "C",
+                "C#",
+                "D",
+                "D#",
+                "E",
+                "F",
+                "F#",
+                "G",
+                "G#"
+            )
+        )
 
-    val keysMinor: CircularList<String> =
-        CircularList(
+    val keysMinor: CircularList<String>
+        get() = CircularList(
             listOf(
                 "Am",
                 "A#m",

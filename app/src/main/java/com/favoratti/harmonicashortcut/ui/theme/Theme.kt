@@ -1,22 +1,23 @@
 package com.favoratti.harmonicashortcut.ui.theme
 
 import android.app.Activity
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 
-private val LightColors = lightColorScheme(
+private val lightColors = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
     primaryContainer = md_theme_light_primaryContainer,
@@ -48,7 +49,7 @@ private val LightColors = lightColorScheme(
     scrim = md_theme_light_scrim,
 )
 
-private val DarkColors = darkColorScheme(
+private val darkColors = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
     primaryContainer = md_theme_dark_primaryContainer,
@@ -80,34 +81,86 @@ private val DarkColors = darkColorScheme(
     scrim = md_theme_dark_scrim,
 )
 
+data class CustomColorScheme(
+    val colorScheme: ColorScheme,
+    val highlight: Color,
+    val onHighlight: Color
+) {
+    val primary get() = colorScheme.primary
+    val onPrimary get() = colorScheme.onPrimary
+    val primaryContainer get() = colorScheme.primaryContainer
+    val onPrimaryContainer get() = colorScheme.onPrimaryContainer
+    val secondary get() = colorScheme.secondary
+    val onSecondary get() = colorScheme.onSecondary
+    val secondaryContainer get() = colorScheme.secondaryContainer
+    val onSecondaryContainer get() = colorScheme.onSecondaryContainer
+    val tertiary get() = colorScheme.tertiary
+    val onTertiary get() = colorScheme.onTertiary
+    val tertiaryContainer get() = colorScheme.tertiaryContainer
+    val onTertiaryContainer get() = colorScheme.onTertiaryContainer
+    val error get() = colorScheme.error
+    val errorContainer get() = colorScheme.errorContainer
+    val onError get() = colorScheme.onError
+    val onErrorContainer get() = colorScheme.onErrorContainer
+    val background get() = colorScheme.background
+    val onBackground get() = colorScheme.onBackground
+    val surface get() = colorScheme.surface
+    val onSurface get() = colorScheme.onSurface
+    val surfaceVariant get() = colorScheme.surfaceVariant
+    val onSurfaceVariant get() = colorScheme.onSurfaceVariant
+    val outline get() = colorScheme.outline
+    val inverseOnSurface get() = colorScheme.inverseOnSurface
+    val inverseSurface get() = colorScheme.inverseSurface
+    val inversePrimary get() = colorScheme.inversePrimary
+    val surfaceTint get() = colorScheme.surfaceTint
+    val outlineVariant get() = colorScheme.outlineVariant
+    val scrim get() = colorScheme.scrim
+}
+
+private val lightColorPalette = CustomColorScheme(
+    colorScheme = lightColors,
+    highlight = light_highlight,
+    onHighlight = light_onhighlight
+)
+
+private val darkColorPalette = CustomColorScheme(
+    colorScheme = darkColors,
+    highlight = dark_highlight,
+    onHighlight = dark_onhighlight
+)
+
+private val localColors = staticCompositionLocalOf { lightColorPalette }
+
+
 @Composable
 fun HarmonicaShortcutTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> com.favoratti.harmonicashortcut.ui.theme.DarkColors
-        else -> com.favoratti.harmonicashortcut.ui.theme.LightColors
+    val colors = when {
+        darkTheme -> darkColorPalette
+        else -> lightColorPalette
     }
+
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
+            window.statusBarColor = colors.colorScheme.primary.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    CompositionLocalProvider(localColors provides colors) {
+        MaterialTheme(
+            colorScheme = colors.colorScheme,
+            typography = Typography,
+            content = content,
+        )
+    }
 }
+
+val MaterialTheme.customColorScheme: CustomColorScheme
+    @Composable
+    @ReadOnlyComposable
+    get() = localColors.current

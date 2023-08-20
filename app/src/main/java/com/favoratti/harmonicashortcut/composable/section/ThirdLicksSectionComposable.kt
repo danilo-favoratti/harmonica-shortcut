@@ -4,7 +4,6 @@ import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -19,7 +18,6 @@ import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 fun ThirdLicksSection() {
     HarmonicaCardTitle(
         title = "Third Licks",
-        containerColor = MaterialTheme.colorScheme.secondaryContainer
     ) {
         Image(
             painter = painterResource(id = R.drawable.terceira), // Replace with the actual image resource

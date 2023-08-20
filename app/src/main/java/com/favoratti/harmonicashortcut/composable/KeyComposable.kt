@@ -50,28 +50,34 @@ fun KeyLayout(
     onClick: () -> Unit
 ) {
     val backgroundColor = if (selectedKey.value == key) {
-        MaterialTheme.colorScheme.primary
+        MaterialTheme.colorScheme.tertiaryContainer
     } else {
-        MaterialTheme.colorScheme.secondary
+        MaterialTheme.colorScheme.primaryContainer
     }
 
     val fontColor = if (selectedKey.value == key) {
-        MaterialTheme.colorScheme.onPrimary
+        MaterialTheme.colorScheme.onTertiaryContainer
     } else {
-        MaterialTheme.colorScheme.onSecondary
+        MaterialTheme.colorScheme.onPrimaryContainer
     }
 
-    Key(key, backgroundColor, fontColor, onClick)
+    Key(
+        text = key,
+        backgroundColor = backgroundColor,
+        fontColor = fontColor,
+        onClick = onClick
+    )
 }
 
 @Composable
 fun Key(
-    key: String,
+    text: String,
+    number: String? = null,
     backgroundColor: Color = MaterialTheme.colorScheme.primary,
     fontColor: Color = MaterialTheme.colorScheme.onPrimary,
     onClick: () -> Unit = { }
 ) {
-    if (key.isEmpty()) {
+    if (text.isEmpty()) {
         Box(
             modifier = Modifier
                 .background(Color.Transparent)
@@ -88,10 +94,13 @@ fun Key(
                 .clickable(onClick = onClick),
             contentAlignment = Alignment.Center
         ) {
+            val text = number?.let {
+                "$number:$text"
+            }?: text
             Text(
                 modifier = Modifier.align(Alignment.Center),
                 style = MaterialTheme.typography.labelMedium.copy(color = fontColor),
-                text = key
+                text = text
             )
         }
     }

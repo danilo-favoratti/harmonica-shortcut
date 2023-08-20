@@ -8,7 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.favoratti.harmonicashortcut.composable.harmonica.HarmonicaLayout
+import com.favoratti.harmonicashortcut.composable.HarmonicaLayout
+import com.favoratti.harmonicashortcut.composable.scales.Scale
 import com.favoratti.harmonicashortcut.composable.song.SongKeySelector
 import com.favoratti.harmonicashortcut.composable.song.SongPositionDisplay
 import com.favoratti.harmonicashortcut.composable.util.HarmonicaCardTitle
@@ -30,7 +31,6 @@ fun SongKeySection(
         )
 
         SongPositionDisplay(
-            scaleState = songKeyViewModel.scaleState,
             scaleKeyState = songKeyViewModel.scaleKeyState,
             firstPosition = songKeyViewModel.firstPositionState,
             secondPosition = songKeyViewModel.secondPositionState,
@@ -38,8 +38,11 @@ fun SongKeySection(
             onKeyScaleSelectionClick = songKeyViewModel::onKeyScaleSelectionClick
         )
 
+        Scale(scale = songKeyViewModel.scaleState.value)
+
         Row(modifier = Modifier.fillMaxWidth()) {
             HarmonicaLayout(
+                showNumbers = true,
                 keyState = songKeyViewModel.scaleKeyState,
                 positionMapState = songKeyViewModel.positionMapState,
                 paddingValues = PaddingValues(horizontal = 8.dp, vertical = 8.dp),

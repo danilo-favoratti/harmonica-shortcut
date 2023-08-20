@@ -22,7 +22,6 @@ import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 @Composable
 fun HarmonicaCardTitle(
     title: String,
-    containerColor: Color = MaterialTheme.colorScheme.tertiaryContainer,
     paddingBottom: Dp = 0.dp,
     content: @Composable ColumnScope.() -> Unit
 ) {
@@ -33,15 +32,13 @@ fun HarmonicaCardTitle(
     }
 
     Row(modifier = Modifier.padding(bottom = paddingBottom)) {
-        HarmonicaCard(
-            containerColor, content = content
-        )
+        HarmonicaCard(content = content)
     }
 }
 
 @Composable
 fun HarmonicaCard(
-    containerColor: Color = MaterialTheme.colorScheme.tertiaryContainer,
+    containerColor: Color = MaterialTheme.colorScheme.secondaryContainer,
     paddingValues: PaddingValues = PaddingValues(horizontal = 16.dp),
     content: @Composable ColumnScope.() -> Unit
 ) {
