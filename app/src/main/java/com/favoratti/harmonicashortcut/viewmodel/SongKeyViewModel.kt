@@ -19,6 +19,9 @@ class SongKeyViewModel : ViewModel() {
     private val mPositionMapState = mutableStateOf<Map<Int, ArrayList<Boolean>>?>(null)
     val positionMapState: State<Map<Int, ArrayList<Boolean>>?> = mPositionMapState
 
+    private val mNumberNoteState = mutableStateOf(true)
+    val numberNoteState: State<Boolean> = mNumberNoteState
+
     private val mFirstPositionMutableState = mutableStateOf("")
     val firstPositionState: State<String> = mFirstPositionMutableState
 
@@ -65,6 +68,10 @@ class SongKeyViewModel : ViewModel() {
         mScaleMutableState.value = Data.arrayPosition[position]
 
         mPositionMapState.value = Data.arrayPositionMap[position]
+    }
+
+    fun setNumberNoteState() {
+        mNumberNoteState.value = mNumberNoteState.value.not()
     }
 
     private fun String.removeMinor() = this.replace("m", "")

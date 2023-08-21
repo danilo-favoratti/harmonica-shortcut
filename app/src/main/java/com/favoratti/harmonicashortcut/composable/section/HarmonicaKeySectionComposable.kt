@@ -13,6 +13,7 @@ import com.favoratti.harmonicashortcut.composable.util.HarmonicaCardTitle
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 import com.favoratti.harmonicashortcut.viewmodel.HarmonicaKeyViewModel
 import com.favoratti.harmonicashortcut.viewmodel.HarmonicaLayoutViewModel
+import com.favoratti.harmonicashortcut.viewmodel.ShowOnlyNumberSwitch
 
 @Composable
 fun HarmonicaKeySection(
@@ -41,12 +42,17 @@ fun HarmonicaKeySection(
         Scale(scale = harmonicaKeyViewModel.scaleState.value)
 
         HarmonicaLayout(
-            showNumbers = true,
+            showNumbers = harmonicaKeyViewModel.numberNoteState.value,
             keyState = harmonicaKeyViewModel.selectedKeyState,
             positionMapState = harmonicaKeyViewModel.positionMapState,
             paddingValues = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
             onKeyLayoutSelection = harmonicaLayoutViewModel::onKeyLayoutSelection,
             onKeyLayoutHighlight = harmonicaLayoutViewModel::onKeyLayoutHighlight
+        )
+
+        ShowOnlyNumberSwitch(
+            checked = harmonicaKeyViewModel.numberNoteState.value,
+            onCheckedChange = harmonicaKeyViewModel::setNumberNoteState
         )
     }
 }

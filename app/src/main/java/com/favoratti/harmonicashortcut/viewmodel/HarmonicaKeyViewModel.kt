@@ -19,6 +19,9 @@ class HarmonicaKeyViewModel : ViewModel() {
     private val mPositionMapState = mutableStateOf<Map<Int, ArrayList<Boolean>>?>(null)
     val positionMapState: State<Map<Int, ArrayList<Boolean>>?> = mPositionMapState
 
+    private val mNumberNoteState = mutableStateOf(true)
+    val numberNoteState: State<Boolean> = mNumberNoteState
+
     private val mFirstPositionMutableState = mutableStateOf("")
     val firstPositionState: State<String> = mFirstPositionMutableState
 
@@ -69,6 +72,10 @@ class HarmonicaKeyViewModel : ViewModel() {
         mScaleMutableState.value = Data.arrayPosition[position]
 
         mPositionMapState.value = Data.arrayPositionMap[position]
+    }
+
+    fun setNumberNoteState() {
+        mNumberNoteState.value = mNumberNoteState.value.not()
     }
 
     companion object {
