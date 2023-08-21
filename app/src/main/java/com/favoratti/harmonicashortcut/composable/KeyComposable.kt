@@ -94,13 +94,13 @@ fun Key(
                 .clickable(onClick = onClick),
             contentAlignment = Alignment.Center
         ) {
-            val text = number?.let {
+            val keyText = number?.let {
                 "$number:$text"
             } ?: text
             Text(
                 modifier = Modifier.align(Alignment.Center),
                 style = MaterialTheme.typography.labelMedium.copy(color = fontColor),
-                text = text
+                text = keyText
             )
         }
     }

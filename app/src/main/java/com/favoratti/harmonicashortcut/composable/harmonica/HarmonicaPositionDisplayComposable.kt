@@ -154,7 +154,6 @@ fun TextHarmonicaPosition(
 @Composable
 fun PositionDisplayPreview() {
     HarmonicaShortcutTheme {
-        val scaleState = remember { mutableStateOf("-1, -2") }
         val scaleKeyState = remember { mutableStateOf("C") }
         val firstPosition = remember { mutableStateOf("C") }
         val secondPosition = remember { mutableStateOf("G") }

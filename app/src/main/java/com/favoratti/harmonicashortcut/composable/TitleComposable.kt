@@ -45,7 +45,6 @@ fun Title(
 @Composable
 fun TitleComposablePreview() {
     HarmonicaShortcutTheme {
-        val key = remember { mutableStateOf("C") }
         Title(
             text = "Harmonica Key:"
         )
