@@ -5,12 +5,13 @@ plugins {
 
 android {
     namespace = "com.favoratti.harmonicashortcut"
-    compileSdk = 33
+    compileSdk = 34
+    compileSdkPreview = "UpsideDownCake"
 
     defaultConfig {
         applicationId = "com.favoratti.harmonicashortcut"
         minSdk = 29
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -51,9 +52,12 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
+    // Splash Screen
+    implementation("androidx.core:core-splashscreen:1.1.0-alpha01")
+
+    implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.0")
+    implementation("androidx.activity:activity-compose:1.7.2")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")

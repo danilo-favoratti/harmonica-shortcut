@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.favoratti.harmonicashortcut.composable.section.CycleOfFifthsSection
 import com.favoratti.harmonicashortcut.composable.section.HarmonicaKeySection
 import com.favoratti.harmonicashortcut.composable.section.HarmonicaLayoutSection
@@ -38,6 +39,7 @@ class MainActivity : ComponentActivity() {
     private val mHarmonicaLayoutViewModel: HarmonicaLayoutViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContent {
             HarmonicaShortcutTheme {
