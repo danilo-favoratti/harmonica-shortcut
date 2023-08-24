@@ -25,14 +25,14 @@ fun HarmonicaCardTitle(
     paddingBottom: Dp = 0.dp,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    Row {
-        Title(
-            text = title
-        )
-    }
+    Column {
+        Row {
+            Title(text = title)
+        }
 
-    Row(modifier = Modifier.padding(bottom = paddingBottom)) {
-        HarmonicaCard(content = content)
+        Row(modifier = Modifier.padding(bottom = paddingBottom)) {
+            HarmonicaCard(content = content)
+        }
     }
 }
 
