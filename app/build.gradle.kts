@@ -51,6 +51,9 @@ android {
 }
 
 dependencies {
+    // Arc Layout
+    implementation("com.github.danilo-favoratti:ArcLayout:0.1.0")
+
     // Splash Screen
     implementation("androidx.core:core-splashscreen:1.1.0-alpha01")
 
