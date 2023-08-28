@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Harmonica Shortcut</string>
+
+    <string name="bottom_navigation_harmonica">Harmonica</string>
+    <string name="bottom_navigation_song">Song</string>
+    <string name="bottom_navigation_tips">Tips</string>
+
+    <string name="bottom_navigation_harmonica_content_descriptor">Harmonica</string>
+    <string name="bottom_navigation_song_content_descriptor">Song</string>
+    <string name="bottom_navigation_tips_content_descriptor">Tips</string>
 </resources>
