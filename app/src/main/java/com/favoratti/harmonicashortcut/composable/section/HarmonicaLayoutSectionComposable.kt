@@ -12,7 +12,10 @@ import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 import com.favoratti.harmonicashortcut.viewmodel.HarmonicaLayoutViewModel
 
 @Composable
-fun HarmonicaLayoutSection(harmonicaLayoutViewModel: HarmonicaLayoutViewModel) {
+fun HarmonicaLayoutSection(
+    harmonicaLayoutViewModel: HarmonicaLayoutViewModel,
+    showGreenMessage: Boolean = true
+) {
     HarmonicaCardTitle(
         title = "Harmonica Layout",
     ) {
@@ -25,7 +28,8 @@ fun HarmonicaLayoutSection(harmonicaLayoutViewModel: HarmonicaLayoutViewModel) {
         HarmonicaLayout(
             paddingValues = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
             keyState = harmonicaLayoutViewModel.keyState,
-            onKeyLayoutSelection = harmonicaLayoutViewModel::onKeyLayoutSelection
+            onKeyLayoutSelection = harmonicaLayoutViewModel::onKeyLayoutSelection,
+            showGreenMessage = showGreenMessage
         )
     }
 }

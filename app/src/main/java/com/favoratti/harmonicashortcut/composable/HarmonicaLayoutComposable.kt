@@ -7,14 +7,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.favoratti.harmonicashortcut.composable.util.HarmonicaCard
 import com.favoratti.harmonicashortcut.data.Data
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
@@ -27,13 +30,24 @@ fun HarmonicaLayout(
     positionMapState: State<Map<Int, ArrayList<Boolean>>?>? = null,
     showNumbers: Boolean = false,
     onKeyLayoutSelection: (String, Int, Int) -> String,
-    onKeyLayoutHighlight: ((Int, Int, Map<Int, ArrayList<Boolean>>?) -> Boolean)? = null
+    onKeyLayoutHighlight: ((Int, Int, Map<Int, ArrayList<Boolean>>?) -> Boolean)? = null,
+    showGreenMessage: Boolean = true
 ) {
     if (keyState.value.isNotEmpty()) {
         HarmonicaCard(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             paddingValues = paddingValues
         ) {
+            if (showGreenMessage) {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    text = "* Just play the green notes",
+                    fontSize = 12.sp,
+                    textAlign = TextAlign.Right
+                )
+            }
             Column(
                 modifier = Modifier
                     .fillMaxWidth()

@@ -137,10 +137,12 @@ fun HarmonicaShortcutTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = when {
+   /* val colors = when {
         darkTheme -> darkColorPalette
         else -> lightColorPalette
-    }
+    }*/
+
+    val colors = darkColorPalette
 
     val view = LocalView.current
     if (!view.isInEditMode) {

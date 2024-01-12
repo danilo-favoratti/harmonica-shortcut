@@ -8,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.favoratti.harmonicashortcut.composable.HarmonicaLayout
+import com.favoratti.harmonicashortcut.composable.harmonica.HarmonicaKeySelector
 import com.favoratti.harmonicashortcut.composable.harmonica.HarmonicaPositionDisplay
 import com.favoratti.harmonicashortcut.composable.scales.Scale
-import com.favoratti.harmonicashortcut.composable.util.HarmonicaArcLayout
 import com.favoratti.harmonicashortcut.composable.util.HarmonicaCardTitle
 import com.favoratti.harmonicashortcut.ui.theme.HarmonicaShortcutTheme
 import com.favoratti.harmonicashortcut.viewmodel.HarmonicaKeyViewModel
@@ -27,6 +27,11 @@ fun HarmonicaKeySection(
             HarmonicaCardTitle(
                 title = "Harmonica Key"
             ) {
+                HarmonicaKeySelector(
+                    harmonicaKey = harmonicaKeyViewModel.selectedKeyState,
+                    onKeySelectionClick = harmonicaKeyViewModel::onKeySelectionClick
+                )
+
                 HarmonicaPositionDisplay(
                     scaleKeyState = harmonicaKeyViewModel.scaleKeyState,
                     firstPosition = harmonicaKeyViewModel.firstPositionState,
@@ -55,12 +60,12 @@ fun HarmonicaKeySection(
                 )
             }
         }
-        Row {
+        /*Row {
             HarmonicaArcLayout(
                 selectedKey = harmonicaKeyViewModel.selectedKeyState,
                 onKeySelectionClick = harmonicaKeyViewModel::onKeySelectionClick
             )
-        }
+        }*/
     }
 }
 

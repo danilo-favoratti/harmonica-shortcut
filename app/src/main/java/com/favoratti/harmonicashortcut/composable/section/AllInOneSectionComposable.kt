@@ -24,15 +24,18 @@ fun AllInOneSection(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        ScalesSection()
-
-        ThirdLicksSection()
-
-        HarmonicaLayoutSection(harmonicaLayoutViewModel)
+        HarmonicaLayoutSection(
+            harmonicaLayoutViewModel,
+            showGreenMessage = false
+        )
 
         CycleOfFifthsSection()
 
-        LinksSection(openWebLink)
+        ScalesSection()
+
+        //ThirdLicksSection()
+
+        //LinksSection(openWebLink)
     }
 }
 
